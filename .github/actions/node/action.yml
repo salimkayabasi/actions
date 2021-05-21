@@ -4,8 +4,8 @@ description: |
   Using `runs.env` is not supported at this moment
 
 runs:
-  #  env:
-  #    ENV_NAME: ENV_VALUE
+  env:
+    ENV_NAME: ENV_VALUE
   using: composite
   steps:
     - shell: bash
