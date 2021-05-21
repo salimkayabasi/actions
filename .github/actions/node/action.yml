@@ -1,0 +1,25 @@
+name: Node.js
+description: |
+  Node.js Steps
+  Using `runs.env` is not supported at this moment
+
+runs:
+  #  env:
+  #    ENV_NAME: ENV_VALUE
+  using: composite
+  steps:
+    - shell: bash
+      name: Check version
+      run: node --version
+    - shell: bash
+      name: Installing dependencies
+      run: npm ci
+    - shell: bash
+      name: Lint
+      run: npm run lint
+    - shell: bash
+      name: Build
+      run: npm run build --if-present
+    - shell: bash
+      name: Test
+      run: npm run test
