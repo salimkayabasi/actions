@@ -1,0 +1,24 @@
+{
+  "name": "actions",
+  "version": "1.0.0",
+  "description": "`Github Actions` itself is already awesome but I'd like to collect some of my personal favorites as an example under single umbrella.",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "lint": "echo \"Running desired linters\"",
+    "test": "echo \"Error: no test specified\" && exit 0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/salimkayabasi/actions.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/salimkayabasi/actions/issues"
+  },
+  "homepage": "https://github.com/salimkayabasi/actions#readme"
+}
