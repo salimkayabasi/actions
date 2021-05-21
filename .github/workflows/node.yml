@@ -1,6 +1,4 @@
-name: |
-  Node.js
-  Runs reusable Node.js action, please check ./.github/actions/node folder as well
+name: Node.js
 
 on:
   push:
@@ -10,5 +8,7 @@ jobs:
     name: Node.js check
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: ./.github/actions/node
+      - name: Checkout
+        uses: actions/checkout@v2.3.4
+      - name: Node.js steps
+        uses: ./.github/actions/node

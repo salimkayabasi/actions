@@ -7,7 +7,8 @@ jobs:
     name: Commitlint
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout
+        uses: actions/checkout@v2.3.4
         with:
           fetch-depth: 0
       - uses: wagoid/commitlint-github-action@v3.1.4
