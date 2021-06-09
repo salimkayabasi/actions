@@ -11,7 +11,7 @@ on:
 
 env:
   DISPLAY: :99.0
-  DRAWIO_VERSION: 13.9.9
+  DRAWIO_VERSION: 14.6.13
   DRAWIO_DISABLE_UPDATE: true
 
 jobs:
@@ -23,9 +23,9 @@ jobs:
         timeout-minutes: 3
         run: |
           sudo apt-get install libappindicator3-1
-          wget https://github.com/jgraph/drawio-desktop/releases/download/v${{ env.DRAWIO_VERSION }}/draw.io-amd64-${{ env.DRAWIO_VERSION }}.deb
-          sudo dpkg -i draw.io-amd64-${{ env.DRAWIO_VERSION }}.deb
-          sudo rm draw.io-amd64-${{ env.DRAWIO_VERSION }}.deb
+          wget https://github.com/jgraph/drawio-desktop/releases/download/v${{ env.DRAWIO_VERSION }}/drawio-amd64-${{ env.DRAWIO_VERSION }}.deb
+          sudo dpkg -i drawio-amd64-${{ env.DRAWIO_VERSION }}.deb
+          sudo rm drawio-amd64-${{ env.DRAWIO_VERSION }}.deb
           Xvfb :99 -screen 0 1024x768x24 > /dev/null 2>&1 &
           drawio --help
       - name: Checkout
