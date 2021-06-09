@@ -1,0 +1,54 @@
+name: 'Compile Mermaid in Markdown'
+
+on:
+  pull_request:
+    types:
+      - opened
+      - synchronize
+      - closed
+    paths:
+      - '**/*.md'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2.3.4
+        with:
+          fetch-depth: 2
+          ref: ${{ github.event.pull_request.head.sha }}
+      - name: Check files
+        id: getfile
+        run: |
+          echo "::set-output name=files::$(git diff-tree --no-commit-id --name-only -r ${{ github.event.pull_request.head.sha }} | grep -e '.*\.md$' | xargs)"
+      - name: Updated MD files
+        run: |
+          echo ${{ steps.getfile.outputs.files }}
+      - name: Compile mermaid
+        uses: neenjaw/compile-mermaid-markdown-action@v0.3.3
+        with:
+          files: ${{ steps.getfile.outputs.files }}
+          output: 'docs'
+        env:
+          HIDE_CODEBLOCKS: 1
+          ABSOLUTE_IMAGE_LINKS: 1
+          OUTPUT_FILE_TYPE: svg
+      - name: Create Pull Request
+        id: cpr
+        uses: peter-evans/create-pull-request@v3
+        with:
+          committer: GitHub <noreply@github.com>
+          base: ${{ github.event.pull_request.head.ref }}
+          commit-message: 'docs: updating mermaid based images'
+          author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
+          delete-branch: true
+          branch: auto-generated-for-PR-${{ github.event.pull_request.head.ref }}-${{ github.event.pull_request.number }}
+          title: '[bot] Mermaid updates for PR #${{ github.event.pull_request.number }}'
+          body: 'Please merge this PR to #${{ github.event.pull_request.number }}'
+      - name: Comment to PR
+        if: steps.cpr.outputs.pull-request-number
+        uses: unsplash/comment-on-pr@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          msg: 'Please merge #${{ steps.cpr.outputs.pull-request-number }} before merging this PR'

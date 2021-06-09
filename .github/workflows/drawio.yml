@@ -48,11 +48,13 @@ jobs:
         id: cpr
         uses: peter-evans/create-pull-request@v3
         with:
+          committer: GitHub <noreply@github.com>
           base: ${{ github.event.pull_request.head.ref }}
           commit-message: 'docs: updating drawio based images'
+          author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
           delete-branch: true
           branch: auto-generated-for-PR-${{ github.event.pull_request.head.ref }}-${{ github.event.pull_request.number }}
-          title: '[bot] Drawio updates for PR #${{ github.event.pull_request.number }}'
+          title: '[bot] PR for #${{ github.event.pull_request.number }}'
           body: 'Please merge this PR to #${{ github.event.pull_request.number }}'
       - name: Comment to PR
         if: steps.cpr.outputs.pull-request-number
