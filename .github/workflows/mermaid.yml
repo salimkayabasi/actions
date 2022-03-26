@@ -35,7 +35,7 @@ jobs:
           OUTPUT_FILE_TYPE: svg
       - name: Create Pull Request
         id: cpr
-        uses: peter-evans/create-pull-request@v3
+        uses: peter-evans/create-pull-request@v4
         with:
           committer: GitHub <noreply@github.com>
           base: ${{ github.event.pull_request.head.ref }}
