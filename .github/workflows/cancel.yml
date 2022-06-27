@@ -19,7 +19,7 @@ jobs:
           WORKFLOW_ID=$(echo $RESPONSE | jq -r '.workflows | map(.id) | join(",")')
 
           echo "::set-output name=workflow_id::$WORKFLOW_ID"
-      - uses: styfle/cancel-workflow-action@0.9.1
+      - uses: styfle/cancel-workflow-action@0.10.0
         name: Cancel All
         with:
           workflow_id: ${{ steps.get_ids.outputs.workflow_id }}
